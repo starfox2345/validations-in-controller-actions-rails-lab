@@ -5,12 +5,17 @@ class PostsController < ApplicationController
   end
 
   def edit
+    set_post!
   end
 
   def update
+    set_post!
     @post.update(post_params)
-
+    if @post.valid?
     redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
   private
